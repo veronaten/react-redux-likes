@@ -1,11 +1,20 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import uniqid from 'uniqid';
+import { commentCreate } from "../redux/actions";
 import SingleComment from "./SingleComment";
 
 const Comments = (props) => {
-
     const [textComment, setTextComment] = useState('');
-    // console.log('comments props >>',props);
 
+    const comments = useSelector(state => {
+        console.log('state >', state);
+        const { commentsReducer } = state;
+        return commentsReducer.comments;
+    });
+
+    console.log('commetns  >', comments);
+    const dispatch = useDispatch();
     
 
     const handleInput = (event) => {
@@ -16,6 +25,8 @@ const Comments = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('submit textComment>', textComment);
+        const id = uniqid();
+        dispatch(commentCreate(textComment, id))
     }
     return (
         <div className="card-comments">
@@ -23,7 +34,10 @@ const Comments = (props) => {
                 <input type="text" value={textComment} onChange={handleInput}/>
                 <input type="submit" hidden/>
             </form>
-            <SingleComment />
+            {!!comments.length && comments.map(res => {
+                return <SingleComment key={res.id} data={res}/>
+            })}
+          
         </div>
     )
 }
