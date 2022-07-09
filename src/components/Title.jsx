@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux/es/exports";
 import { inputText } from "../redux/actions";
 
 const Title = (props) => {
-  console.log('title props:', props);
+  // console.log('title props:', props);
   const text = useSelector(state => {
     const {inputReducer} = state;
     return inputReducer.text

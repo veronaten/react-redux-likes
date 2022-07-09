@@ -8,26 +8,26 @@ const Comments = (props) => {
     const [textComment, setTextComment] = useState('');
 
     const comments = useSelector(state => {
-        console.log('state >', state);
         const { commentsReducer } = state;
         return commentsReducer.comments;
     });
 
-    console.log('commetns  >', comments);
     const dispatch = useDispatch();
     
 
     const handleInput = (event) => {
-         console.log('input >>', event.target.value);
+        //  console.log('input >>', event.target.value);
          setTextComment(event.target.value);
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('submit textComment>', textComment);
+        // console.log('submit textComment>', textComment);
         const id = uniqid();
         dispatch(commentCreate(textComment, id))
     }
+
+    console.log('comments  >', comments);
     return (
         <div className="card-comments">
             <form onSubmit={handleSubmit} className="comments-item-create">
