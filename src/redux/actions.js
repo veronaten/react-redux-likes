@@ -1,4 +1,4 @@
-import { INCREMENT, DECREMENT, INPUT_TEXT, COMMENT_CREATE, COMMENT_UPDATE } from "./types";
+import { INCREMENT, DECREMENT, INPUT_TEXT, COMMENT_CREATE, COMMENT_UPDATE, COMMENT_DELETE } from "./types";
 
 export const incrementLikes = () => {
     return {
@@ -30,6 +30,13 @@ export const commentUpdate = (text, id) => {
     return {
         type: COMMENT_UPDATE,
         data: { text, id }
+    }
+}
+
+export const commentDelete = (id) => {
+    return {
+        type: COMMENT_DELETE,
+        id
     }
 }
 

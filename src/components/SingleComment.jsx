@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { commentUpdate } from '../redux/actions';
+import { commentUpdate, commentDelete } from '../redux/actions';
 
 const SingleComment = ({ data }) => { 
     const [commentText, setCommentText] = useState('');
@@ -12,7 +12,6 @@ const SingleComment = ({ data }) => {
     const handleUpdate = (event) => {
         event.preventDefault();
         dispatch(commentUpdate(commentText, id));
-        
     }
 
     useEffect(() => {
@@ -24,10 +23,15 @@ const SingleComment = ({ data }) => {
     const handleInput = (event) => {
         setCommentText(event.target.value);
     }
+
+    const handleDelete = (event) => {
+        event.preventDefault();
+        dispatch(commentDelete(id));
+    }
     
     return (
         <form onSubmit={handleUpdate} className="comments-item">
-            <div className="comments-item-delete">&times;</div>
+            <div onClick={handleDelete} className="comments-item-delete">&times;</div>
             <input type="text" value={commentText} onChange={handleInput}/>
             <input type="submit" hidden/>
         </form>
