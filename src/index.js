@@ -6,11 +6,13 @@ import { Provider } from 'react-redux/es/exports';
 import './index.css';
 import App from './App';
 import { rootReducer } from './redux/rootReducer';
+import { spamFilter } from './redux/middleware';
 
 
 const store = createStore(rootReducer, compose(
   applyMiddleware(
-    thunk
+    thunk,
+    spamFilter
   ),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 ));
